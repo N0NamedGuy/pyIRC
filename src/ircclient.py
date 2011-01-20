@@ -231,7 +231,7 @@ class ircclient:
     state='' # am I waiting for some data from server?
     channels={}
 
-    DEBUG=True
+    DEBUG=False
 
     def __init__(self, host, port):
         self.host=host
@@ -254,7 +254,8 @@ class ircclient:
         self.s.settimeout(1) # timeout for blocking operations in seconds
 
     def close(self):
-        print 'Closing client'
+        if (self.DEBUG):
+            print 'Closing client'
         self.running = False
         self.s.close()
 
@@ -263,8 +264,6 @@ class ircclient:
         self.nick=nick
 
     def send(self, msg):
-        print '>> %s' % (msg,)
-
         if len(msg)+2 > self.MSG_MAX_LENGTH:
             raise LineTooLong
 
@@ -514,7 +513,8 @@ class ircclient:
         # To be on the safe side, we run WHO to update anything we missed
         # namely, the user's status
         self.who(channel)
-        print self.channels[channel]
+        if self.DEBUG:
+            print self.channels[channel]
     
     def event_part(self, user, channel, msg):
         if self.DEBUG:
