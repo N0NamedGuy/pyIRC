@@ -29,10 +29,6 @@ class pyirc(ircclient):
     def event_join(self, user, chan):
         ircclient.event_join(self, user, chan)
         print '* %s joined %s' % (user.get_nick(), chan)
-        self.who(chan)
-        user_list = self.get_users(chan)
-
-        print user_list
     
 
 class client_thread(Thread):
@@ -48,7 +44,7 @@ def parse_cmd(cmd):
     global irc_client
     global irc_host
     
-    if (cmd_tokens[0] == '/server' and len(cmd_tokens) == 2):
+    if (cmd_tokens[0].lower() == '/server' and len(cmd_tokens) == 2):
         irc_host = cmd_tokens[1].split(':')
         if len(irc_host) == 1:
             irc_host[1] = 6667
