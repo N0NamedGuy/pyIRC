@@ -1,0 +1,6 @@
+/server irclei.ath.cx:6667
+/user pyirc irclei.ath.cx spam :eggs
+/nick pyirc-test
+/nickserv login pyirc-test testing
+/join #fct #pyirc #bot
+

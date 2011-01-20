@@ -254,7 +254,7 @@ class ircclient:
         self.s.settimeout(1) # timeout for blocking operations in seconds
 
     def close(self):
-        print 'Closing bot'
+        print 'Closing client'
         self.running = False
         self.s.close()
 
@@ -263,6 +263,8 @@ class ircclient:
         self.nick=nick
 
     def send(self, msg):
+        print '>> %s' % (msg,)
+
         if len(msg)+2 > self.MSG_MAX_LENGTH:
             raise LineTooLong
 
